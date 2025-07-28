@@ -6,16 +6,32 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ContentView: View {
+    @Environment(\.modelContext) private var modelContext
+    
+    @State private var path = [MeasurementItem]()
+    @State private var sortOrder = SortDescriptor(\MeasurementItem.createdDate, order: .reverse)
+    @State private var searchText = ""
+    
+    private var downloadManager = DownloadManager()
+    private var bubbleAPI = BubbleAPI()
+    
+    init() {
+
+    }
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack(path: $path) {
+            VStack {
+                MeasurementListView(sort: sortOrder, searchText: searchText)
+            }
+            .navigationTitle("TracebookDB")
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationDestination(for: MeasurementItem.self, destination: MeasurementDetailView.init)
+            .searchable(text: $searchText)
         }
-        .padding()
     }
 }
 
