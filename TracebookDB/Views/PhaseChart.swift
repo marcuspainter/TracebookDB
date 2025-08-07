@@ -25,7 +25,7 @@ struct PhaseChart: View {
                     LineMark(
                         x: .value("x", frequency[index]),
                         y: .value("y", originalPhase[index]),
-                        series: .value("Weight", "A")
+                        series: .value("Weight1", "A")
                     )
                     .foregroundStyle(.gray)
                     .lineStyle(StrokeStyle(lineWidth: 1))
@@ -35,7 +35,7 @@ struct PhaseChart: View {
                     LineMark(
                         x: .value("x", frequency[index]),
                         y: .value("y", phase[index]),
-                        series: .value("Weight", "B")
+                        series: .value("Weight2", "B")
                     )
                     .foregroundStyle(.blue)
                     .lineStyle(StrokeStyle(lineWidth: 1))

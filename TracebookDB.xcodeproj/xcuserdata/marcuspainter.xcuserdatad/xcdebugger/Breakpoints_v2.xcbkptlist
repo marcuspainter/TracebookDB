@@ -7,96 +7,48 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "109397BD-4255-4D98-9EDB-A72E54A8ACDC"
+            uuid = "ED9EB801-1AD0-4E27-9383-F390B0079804"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TracebookDB/Views/MeasurementListView.swift"
+            filePath = "TracebookDB/Data/DataProcessor.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "91"
-            endingLineNumber = "91"
-            landmarkName = "body"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "14CCA787-4C27-44A2-A430-41F1E1FD4CAC"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TracebookDB/Views/MeasurementListView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "93"
-            endingLineNumber = "93"
-            landmarkName = "body"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "4536AA90-76A8-48C4-8BF6-8E5A00CB70A5"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TracebookDB/Views/MeasurementListView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "102"
-            endingLineNumber = "102"
-            landmarkName = "body"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "8CAEE265-FA3D-440B-BC50-5FDEF26A97FD"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TracebookDB/Network/BubbleAPI.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "71"
-            endingLineNumber = "71"
-            landmarkName = "getListResponseLong(_:for:pageSize:)"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "processAll(delay:threshold:isPolarityInverted:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "599CCF60-6D84-40E0-BE9F-71DF79DC0D81"
+            uuid = "F3287D04-C155-44D4-9F04-34C15589B6C8"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TracebookDB/Mappers/DataMapper.swift"
+            filePath = "TracebookDB/Data/DataProcessor.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "98"
-            endingLineNumber = "98"
-            landmarkName = "mapMeasurementContent(body:)"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
+            landmarkName = "processAll(delay:threshold:isPolarityInverted:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "3D94CDC7-2F66-457C-AB1C-DA82A6187F38"
+            uuid = "E2A37D8E-2ED6-42C1-825C-AFD5D0EAA3FB"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TracebookDB/Mappers/DataMapper.swift"
+            filePath = "TracebookDB/Views/MeasurementDetailView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "112"
-            endingLineNumber = "112"
-            landmarkName = "parseDoublesWithZeros(_:)"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
+            landmarkName = "init(measurement:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

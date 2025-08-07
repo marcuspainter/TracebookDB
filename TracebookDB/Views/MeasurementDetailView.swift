@@ -13,32 +13,30 @@ struct MeasurementDetailView: View {
     @Environment(\.modelContext) private var modelContext
     @Bindable var measurement: MeasurementItem
     
-    let frequency: [Double]
-    let magnitude: [Double]
-    let phase: [Double]
-    let coherence: [Double]
-    
     @State var isPolarityInverted: Bool = false
     @State var delay: Double = 0.0
     @State var threshold: Double = 0.0
     
+    var dataProcessor: DataProcessor!
+    
     init(measurement: MeasurementItem) {
-        self.frequency = measurement.content?.tfFrequency ?? []
-        self.magnitude = measurement.content?.tfMagnitude ?? []
-        self.phase = measurement.content?.tfPhase ?? []
-        self.coherence = measurement.content?.tfCoherence ?? []
+        let frequency = measurement.content?.tfFrequency ?? []
+        let magnitude = measurement.content?.tfMagnitude ?? []
+        let phase = measurement.content?.tfPhase ?? []
+        let coherence = measurement.content?.tfCoherence ?? []
+        let originalPhase = measurement.content?.tfPhase ?? []
         
         self.measurement = measurement
+        
+        self.dataProcessor = DataProcessor(frequency: frequency, magnitude: magnitude, phase: phase, coherence: coherence)
     }
     
     var body: some View {
         VStack {
             
-
+            MagnitudeChart(frequency: dataProcessor.frequency, magnitude: dataProcessor.magnitude, coherence: dataProcessor.coherence)
             
-            MagnitudeChart(frequency: frequency, magnitude: magnitude, coherence: coherence)
-            
-            PhaseChart(frequency: frequency, phase: phase, originalPhase: phase)
+            PhaseChart(frequency: dataProcessor.frequency, phase: dataProcessor.phase, originalPhase: dataProcessor.originalPhase)
             
             HStack {
                 Toggle("Invert", isOn: $isPolarityInverted)
@@ -55,7 +53,7 @@ struct MeasurementDetailView: View {
             }
             .onChange(of: isPolarityInverted) { _, _ in
                 // Process phase
-                print(">>> Invert polarity\n")
+                updateChart()
             }
             
             HStack {
@@ -77,7 +75,7 @@ struct MeasurementDetailView: View {
                 Text("20").font(.footnote)
             }
             .onChange(of: delay) { _, _ in
-                // Process phase
+                updateChart()
             }
             
             HStack {
@@ -100,6 +98,7 @@ struct MeasurementDetailView: View {
             }
             .onChange(of: threshold) { _, _ in
                 // Update all
+                updateChart()
             }
             
             Text(measurement.title)
@@ -114,10 +113,15 @@ struct MeasurementDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
     }
     
+    func updateChart() {
+        dataProcessor.processAll(delay: delay, threshold: threshold / 100.0, isPolarityInverted: isPolarityInverted)
+    }
+    
     func resetChart() {
         delay = 0.0
         threshold = 0.0
         isPolarityInverted = false
+        dataProcessor.reset()
     }
 }
 

@@ -24,7 +24,7 @@ struct MagnitudeChart: View {
                 ForEach(frequency.indices, id: \.self) { index in
                     LineMark(
                         x: .value("Frequency", frequency[index]),
-                        y: .value("Coherence", coherence[index]),
+                        y: .value("Coherence", coherence[index] * 30),
                         series: .value("Weight", "B")
                     )
                     .foregroundStyle(.red)

@@ -5,24 +5,45 @@
 //  Created by Marcus Painter on 23/07/2025.
 //
 
+import Foundation
+
+@Observable
 class DataProcessor {
     
-    /*
-    func processAll(delay: Double, threshold: Double, isPolarityInverted: Bool) -> (magnitude: [Double], phase: [Double], coherence: [Double], originalPhase: [Double]) {
-
+    var frequency: [Double] = []
+    var magnitude: [Double] = []
+    var phase: [Double] = []
+    var coherence: [Double] = []
+    var originalPhase: [Double] = []
+    
+    private var tfFrequency: [Double] = []
+    private var tfMagnitude: [Double] = []
+    private var tfPhase: [Double] = []
+    private var tfCoherence: [Double] = []
+    
+    init(frequency: [Double], magnitude: [Double], phase: [Double], coherence: [Double]) {
+        self.tfFrequency = frequency
+        self.tfMagnitude = magnitude
+        self.tfPhase = phase
+        self.tfCoherence = coherence
+        
+        reset()
+    }
+    
+    func processAll(delay: Double, threshold: Double, isPolarityInverted: Bool) {
         var newCoherence = [Double](repeating: 0, count: tfFrequency.count)
         var newMagnitude = [Double](repeating: 0, count: tfFrequency.count)
         var newPhase = [Double](repeating: 0, count: tfFrequency.count)
         var newOriginalPhase = [Double](repeating: 0, count: tfFrequency.count)
 
-        for index in 0..<tfFrequency.count {
-            newCoherence[index] = index < self.tfCoherence.count ? self.tfCoherence[index]  / 3.333 : Double.nan// Scaling for chart
-            newMagnitude[index] = index < self.tfMagnitude.count ? self.tfMagnitude[index] : Double.nan
-            newPhase[index] =  index < self.tfPhase.count ? self.tfPhase[index] : Double.nan
-            newOriginalPhase[index] = index < self.tfPhase.count ? self.tfPhase[index] : Double.nan
+        for index in 0..<frequency.count {
+            newCoherence[index] = index < tfCoherence.count ? tfCoherence[index] : Double.nan// Scaling for chart
+            newMagnitude[index] = index < tfMagnitude.count ? tfMagnitude[index] : Double.nan
+            newPhase[index] =  index < tfPhase.count ? tfPhase[index] : Double.nan
+            newOriginalPhase[index] = index < tfPhase.count ? tfPhase[index] : Double.nan
 
-            if index < self.tfCoherence.count {
-                let coherence = self.tfCoherence[index]
+            if index < tfCoherence.count {
+                let coherence = tfCoherence[index]
                 
                 if coherence < threshold {
                     newCoherence[index] = Double.nan
@@ -30,8 +51,8 @@ class DataProcessor {
                     newPhase[index] = Double.nan
                     newOriginalPhase[index] = Double.nan
                 } else {
-                    let frequency = index < self.tfFrequency.count ? self.tfFrequency[index] : Double.nan
-                    var phase = index < self.tfPhase.count ? self.tfPhase[index] : Double.nan
+                    let frequency = index < tfFrequency.count ? tfFrequency[index] : Double.nan
+                    var phase = index < tfPhase.count ? tfPhase[index] : Double.nan
                     phase += (frequency * 360.0 * (delay * -1.0 / 1000.0))
                     if isPolarityInverted {
                         phase += 180.0
@@ -40,9 +61,20 @@ class DataProcessor {
                 }
            }
         }
-        return (newMagnitude, newPhase, newCoherence, newOriginalPhase)
+        self.magnitude = newMagnitude
+        self.phase = newPhase
+        self.coherence = newCoherence
+        self.originalPhase = newOriginalPhase
+        return
     }
-    */
+    
+    func reset() {
+        self.frequency = tfFrequency
+        self.magnitude = tfMagnitude
+        self.phase = tfPhase
+        self.coherence = tfCoherence
+        self.originalPhase = tfPhase
+    }
     
     private func wrapTo180(_ phase: Double) -> Double {
         var newPhase = (phase + 180.0).truncatingRemainder(dividingBy: 360.0)

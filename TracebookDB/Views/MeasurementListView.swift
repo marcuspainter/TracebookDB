@@ -28,31 +28,7 @@ struct MeasurementListView: View {
         List {
             ForEach(measurements) { measurement in
                 NavigationLink(value: measurement) {
-                    AsyncImage(url: URL(string: "https:" + measurement.thumbnailImage)) { phase in
-                        switch phase {
-                        case .empty:
-                            ProgressView()
-                        case let .success(image):
-                            image
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                        case .failure:
-                            Image(systemName: "photo")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .foregroundColor(.gray)
-                        @unknown default:
-                            Text("Unknown")
-                                .foregroundColor(Color(.systemGray))
-                        }
-                    }
-                    .frame(width: 50, height: 50, alignment: .center)
-
-                    Text(measurement.title)
-                        .font(.headline)
-                    
-                    Text(measurement.content?.medal ?? "")
-                        .font(.headline)
+                    MeasurementItemView(measurement: measurement)
                 }
             }
         }
@@ -90,13 +66,13 @@ struct MeasurementListView: View {
                 let measurements = await bubbleAPI.getMeasurementLong()
                 for measurement in measurements {
                     
-                    let m = DataMapper.mapMeasurementItem(body: measurement)
+                    let m = MeasurementMapper.toModel(body: measurement)
                     
                     //if let content = await bubbleAPI.getMeasurementContent(id: m.contentId) {
                     //    if let c = DataMapper.mapMeasurementContent(body: content) {
                     //        m.content = c
                     //        c.item = m
-                     //   }
+                    //   }
                     //}
                     
                     print(m.title)
@@ -114,7 +90,7 @@ struct MeasurementListView: View {
                 for m in list {
                     if m.additionalContent == "" { continue }
                     if let content = await bubbleAPI.getMeasurementContent(id: m.additionalContent) {
-                        if let c = DataMapper.mapMeasurementContent(body: content) {
+                        if let c = MeasurementContentMapper.toModel(body: content) {
                             assert(m.additionalContent == c.id, "No match")
                             m.content = c
                             c.item = m
