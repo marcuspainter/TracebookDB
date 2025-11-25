@@ -15,9 +15,6 @@ class DataManager {
     let container: ModelContainer
     let context: ModelContext
 
-    // Optionally expose fetched data
-    var measurements: [MeasurementItem] = []
-
     init() throws {
         container = try ModelContainer(for: MeasurementItem.self, MeasurementContent.self)
         context = ModelContext(container)

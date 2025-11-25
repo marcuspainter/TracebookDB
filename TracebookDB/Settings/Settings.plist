@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>FacebookGroupURL</key>
+	<string>https://www.facebook.com/groups/tracebookdata</string>
+	<key>TracebookURL</key>
+	<string>https://trace-book.org</string>
+	<key>Copyright</key>
+	<string>2025 Marcus Painter</string>
+	<key>AppSupportURL</key>
+	<string>https://marcuspainter.com/apps/tracebook</string>
+	<key>AppPrivacyPolicyURL</key>
+	<string>https://marcuspainter.com/apps/tracebook/tracebook-privacy</string>
+</dict>
+</plist>

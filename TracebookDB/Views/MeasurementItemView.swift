@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import CachedAsyncImage
 
 struct MeasurementItemView: View {
     var measurement: MeasurementItem
@@ -14,7 +15,7 @@ struct MeasurementItemView: View {
     var body: some View {
         HStack {
             VStack {
-                AsyncImage(url: URL(string: "https:\(measurement.thumbnailImage)"), content: asyncImageContent)
+                AsyncImage(url: URL(string: "https:\(measurement.thumbnailImage)"), content: AsyncImageContent.content)
                     .padding(.top, 0)
                     .frame(width: 75, height: 75, alignment: .center)
                 Spacer()

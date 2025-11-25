@@ -12,9 +12,10 @@ struct MeasurementListView: View {
     @Environment(\.modelContext) var modelContext
     @Query(sort: [SortDescriptor(\MeasurementItem.createdDate, order: .reverse)]) var measurements: [MeasurementItem]
 
-    private var bubbleAPI = BubbleAPI()
+    let searchText: String
 
     init(sort: SortDescriptor<MeasurementItem>, searchText: String) {
+        self.searchText = searchText
         _measurements = Query(filter: #Predicate {
             if searchText.isEmpty {
                 return true
@@ -28,8 +29,25 @@ struct MeasurementListView: View {
         List {
             ForEach(measurements) { measurement in
                 NavigationLink(value: measurement) {
-                    MeasurementItemView(measurement: measurement)
+                   MeasurementItemView(measurement: measurement)
                 }
+            }.listRowBackground(Color.clear)
+        }
+        .listStyle(.plain)
+        .refreshable {
+            // https://stackoverflow.com/questions/74977787/why-is-async-task-cancelled-in-a-refreshable-modifier-on-a-scrollview-ios-16
+            print("Pull")
+            await Task {
+                try? await Task.sleep(for: .seconds(5))
+             }.value
+            print("Done")
+        }
+        
+        .overlay {
+            if measurements.isEmpty && !searchText.isEmpty {
+                /// In case there aren't any search results, we can
+                /// show the new content unavailable view.
+                ContentUnavailableView.search
             }
         }
         
@@ -62,6 +80,7 @@ struct MeasurementListView: View {
 
         Button("Download 2") {
             Task {
+                let bubbleAPI = MeasurementAPI()
                 var list = [MeasurementItem]()
                 let measurements = await bubbleAPI.getMeasurementLong()
                 for measurement in measurements {
@@ -105,5 +124,6 @@ struct MeasurementListView: View {
 }
 
 #Preview {
-    MeasurementListView(sort: SortDescriptor(\MeasurementItem.createdDate, order: .reverse), searchText: "")
+   // MeasurementListView(sort: SortDescriptor(\MeasurementItem.createdDate, order: .reverse), searchText: "")
 }
+

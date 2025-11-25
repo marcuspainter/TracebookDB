@@ -30,14 +30,24 @@ class DataProcessor {
         reset()
     }
     
+    func processInvert(delay: Double, threshold: Double, isPolarityInverted: Bool) {
+    }
+    
+    func processThreshold(delay: Double, threshold: Double, isPolarityInverted: Bool) {
+    }
+    
+    func processDelay(delay: Double, threshold: Double, isPolarityInverted: Bool) {
+    }
+    
     func processAll(delay: Double, threshold: Double, isPolarityInverted: Bool) {
-        var newCoherence = [Double](repeating: 0, count: tfFrequency.count)
-        var newMagnitude = [Double](repeating: 0, count: tfFrequency.count)
-        var newPhase = [Double](repeating: 0, count: tfFrequency.count)
-        var newOriginalPhase = [Double](repeating: 0, count: tfFrequency.count)
+        let count = tfFrequency.count
+        var newCoherence = [Double](repeating: 0, count: count)
+        var newMagnitude = [Double](repeating: 0, count: count)
+        var newPhase = [Double](repeating: 0, count: count)
+        var newOriginalPhase = [Double](repeating: 0, count:count)
 
         for index in 0..<frequency.count {
-            newCoherence[index] = index < tfCoherence.count ? tfCoherence[index] : Double.nan// Scaling for chart
+            newCoherence[index] = index < tfCoherence.count ? tfCoherence[index] : Double.nan
             newMagnitude[index] = index < tfMagnitude.count ? tfMagnitude[index] : Double.nan
             newPhase[index] =  index < tfPhase.count ? tfPhase[index] : Double.nan
             newOriginalPhase[index] = index < tfPhase.count ? tfPhase[index] : Double.nan

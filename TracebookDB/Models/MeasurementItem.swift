@@ -11,6 +11,8 @@ import SwiftData
 @Model
 final class MeasurementItem {
     @Attribute(.unique) var id: String
+    @Relationship(deleteRule: .cascade) var content: MeasurementContent?
+
     var additionalContent: String
     var approved: Bool
     var commentCreator: String
@@ -30,8 +32,6 @@ final class MeasurementItem {
     var admin2Approved: Bool
     var loudspeakerTags: String
     var emailSent: Bool
-    
-    @Relationship(deleteRule: .cascade)  var content: MeasurementContent?
 
     init(id: String,
          additionalContent: String = "",
@@ -53,9 +53,9 @@ final class MeasurementItem {
          admin2Approved: Bool = false,
          loudspeakerTags: String = "",
          emailSent: Bool = false,
-         
+
          content: MeasurementContent? = nil
-        ) {
+    ) {
         self.id = id
         self.additionalContent = additionalContent
         self.approved = approved
@@ -76,10 +76,7 @@ final class MeasurementItem {
         self.admin2Approved = admin2Approved
         self.loudspeakerTags = loudspeakerTags
         self.emailSent = emailSent
-        
+
         self.content = content
     }
 }
-
-
-

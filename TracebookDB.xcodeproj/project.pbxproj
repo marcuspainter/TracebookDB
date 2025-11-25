@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		197FC99B2E44389D004C68A7 /* CachedAsyncImage in Frameworks */ = {isa = PBXBuildFile; productRef = 197FC99A2E44389D004C68A7 /* CachedAsyncImage */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		191E33A42E1C6D22008AE311 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				197FC99B2E44389D004C68A7 /* CachedAsyncImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +117,7 @@
 			);
 			name = TracebookDB;
 			packageProductDependencies = (
+				197FC99A2E44389D004C68A7 /* CachedAsyncImage */,
 			);
 			productName = TracebookDB;
 			productReference = 191E33962E1C6D20008AE311 /* TracebookDB.app */;
@@ -171,7 +177,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1640;
-				LastUpgradeCheck = 1640;
+				LastUpgradeCheck = 2610;
 				TargetAttributes = {
 					191E33952E1C6D1F008AE311 = {
 						CreatedOnToolsVersion = 16.4;
@@ -195,6 +201,9 @@
 			);
 			mainGroup = 191E338D2E1C6D1F008AE311;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				197FC9992E44389D004C68A7 /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 191E33972E1C6D20008AE311 /* Products */;
 			projectDirPath = "";
@@ -328,8 +337,10 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = "";
 			};
 			name = Debug;
 		};
@@ -385,7 +396,9 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_VERSION = "";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -413,7 +426,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.marcuspainter.TracebookDB;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -441,7 +454,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.marcuspainter.TracebookDB;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -459,7 +472,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.marcuspainter.TracebookDBTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TracebookDB.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TracebookDB";
 			};
@@ -478,7 +491,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.marcuspainter.TracebookDBTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TracebookDB.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TracebookDB";
 			};
@@ -495,7 +508,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.marcuspainter.TracebookDBUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = TracebookDB;
 			};
@@ -512,7 +525,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.marcuspainter.TracebookDBUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = TracebookDB;
 			};
@@ -558,6 +571,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		197FC9992E44389D004C68A7 /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/lorenzofiamingo/swiftui-cached-async-image.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.1.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		197FC99A2E44389D004C68A7 /* CachedAsyncImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 197FC9992E44389D004C68A7 /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */;
+			productName = CachedAsyncImage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 191E338E2E1C6D1F008AE311 /* Project object */;
 }

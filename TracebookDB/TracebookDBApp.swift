@@ -13,7 +13,8 @@ struct TracebookDBApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            //ContentView()
+            MainView()
         }
         .modelContainer(for: [MeasurementItem.self, MeasurementContent.self])
     }

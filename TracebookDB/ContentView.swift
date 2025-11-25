@@ -23,6 +23,17 @@ struct ContentView: View {
             .navigationTitle("TracebookDB")
             .navigationBarTitleDisplayMode(.inline)
             .navigationDestination(for: MeasurementItem.self, destination: MeasurementDetailView.init)
+            .toolbarBackground(.visible, for: .navigationBar)
+            .toolbar {
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    // https://stackoverflow.com/questions/64269873/how-can-i-push-a-view-from-a-toolbaritem
+                    NavigationLink {
+                        SettingsView()
+                    } label: {
+                        Image(systemName: "gearshape")
+                    }
+                }
+            }
             .searchable(text: $searchText)
         }
     }

@@ -9,7 +9,7 @@ import Foundation
 import Network
 import SwiftData
 
-class DownloadManager {
+class DownloadService {
 
     var api = TracebookAPI()
     
