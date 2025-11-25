@@ -46,7 +46,7 @@ class DataManager {
         }
     }
     
-    func deleteAllMeasurementItems(id: String) throws {
+    func deleteAllMeasurementItems() throws {
         let models = try getMeasurementItems()
         for model in models {
             context.delete(model)

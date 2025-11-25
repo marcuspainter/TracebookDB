@@ -54,12 +54,12 @@ struct MainView: View {
                 
                 Button("Download 2") {
                     Task {
-                        let bubbleAPI = MeasurementAPI()
+                        let bubbleAPI = TracebookAPI()
                         var list = [MeasurementItem]()
                         let measurements = await bubbleAPI.getMeasurementLong()
                         for measurement in measurements {
                             
-                            let m = MeasurementMapper.toModel(body: measurement)
+                            let m = MeasurementItemMapper.toModel(body: measurement)
                             
                             //if let content = await bubbleAPI.getMeasurementContent(id: m.contentId) {
                             //    if let c = DataMapper.mapMeasurementContent(body: content) {

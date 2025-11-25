@@ -8,5 +8,3 @@
 struct BubbleItemResponse<T: Codable>: BubbleItemResponseProtocol {
     let response: T
 }
-
-

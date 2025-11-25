@@ -1,11 +1,11 @@
 //
-//  MeasurementMapper.swift
+//  MeasurementItemMapper.swift
 //  TracebookDB
 //
 //  Created by Marcus Painter on 30/07/2025.
 //
 
-class MeasurementMapper {
+class MeasurementItemMapper {
     
     static func toModel(body: MeasurementBody) -> MeasurementItem {
         
