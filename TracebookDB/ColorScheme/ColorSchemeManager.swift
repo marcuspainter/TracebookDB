@@ -14,12 +14,11 @@ import SwiftUI
 
 /// Manages the app color scheme and stores scheme in UserDefaults
 @MainActor
-@Observable
-public class ColorSchemeManager {
+public class ColorSchemeManager: ObservableObject {
     /// Shared instance
     public static let shared = ColorSchemeManager()
     /// User default key name
-    private static let keyName: String = "colorScheme"
+    public static let keyName: String = "colorScheme"
 
     /// Private initializer.
     private init() {
@@ -46,9 +45,7 @@ public class ColorSchemeManager {
     }
 
     /// Sets the color scheme. Setting this property will apply the scheme
-    @ObservationIgnored
-    @AppStorage(ColorSchemeManager.keyName)
-    var colorScheme: ColorSchemeType = .unspecified {
+    @AppStorage(ColorSchemeManager.keyName) var colorScheme: ColorSchemeType = .unspecified {
         didSet {
             applyColorScheme()
         }

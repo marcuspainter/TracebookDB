@@ -18,6 +18,7 @@ class TracebookStore {
             container = try ModelContainer(for: MeasurementItem.self, MeasurementContent.self)
             context = ModelContext(container)
         } catch {
+            print(error)
             fatalError("Failed")
         }
     }

@@ -117,16 +117,16 @@ struct MeasurementDetailView: View {
                     let content = measurement.content
                     
                     TextLine(text: "Calibrator Reference:", value: content?.calibrator)
-                    TextLine(text: "Microphone:", value: content?.microphone)
+                    TextLine(text: "Microphone:", value: content?.microphoneText)
                     TextLine(text: "Distance:", value: valueUnit(content?.distance, content?.distanceUnits))
                     TextLine(text: "Delay locator:", value: valueUnit(content?.delayLocator, "ms"))
                     TextLine(text: "System latency:", value: valueUnit(content?.systemLatency, "ms"))
                     TextLine(text: "Temperature:", value: valueUnit(content?.temperature, content?.tempUnits))
-                    TextLine(text: "Microphone interface:", value: content?.interface)
+                    TextLine(text: "Microphone interface:", value: content?.interfaceText)
                     TextLine(text: "Microphone interface settings:", value: "")
                     TextLine(text: "Microphone correction curve:", value: content?.micCorrectionCurve)
                     TextLine(text: "Windscreen:", value: content?.windscreen)
-                    TextLine(text: "Analyzer:", value: content?.analyzer)
+                    TextLine(text: "Analyzer:", value: content?.analyzerText)
                     TextLine(text: "Coherence:", value: content?.coherenceScale)
                     
                     Divider()

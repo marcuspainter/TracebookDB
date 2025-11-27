@@ -8,8 +8,8 @@
 import Foundation
 
 struct BubbleErrorBody: Codable {
-    let status: String?
-    let message: String?
+    var status: String?
+    var message: String?
     
     enum CodingKeys: String, CodingKey {
         case status = "Status"

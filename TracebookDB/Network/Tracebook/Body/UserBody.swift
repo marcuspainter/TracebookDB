@@ -8,20 +8,20 @@
 import Foundation
 
 struct UserBody: Codable {
-    let name: String?
-    let photo: String?
-    let location: String?
-    let headline: String?
-    let firstName: String?
-    let lastName: String?
-    let followers: [String]?
-    let following: [String]?
-    let measurementsCreated: [String]?
-    let referralCode: String?
-    let pseudonym: String?
-    let measurementsCreatedCount: Int?
-    let userSignedUp: Bool?
-    let id: String
+    var name: String?
+    var photo: String?
+    var location: String?
+    var headline: String?
+    var firstName: String?
+    var lastName: String?
+    var followers: [String]?
+    var following: [String]?
+    var measurementsCreated: [String]?
+    var referralCode: String?
+    var pseudonym: String?
+    var measurementsCreatedCount: Int?
+    var userSignedUp: Bool?
+    var id: String
 
     enum CodingKeys: String, CodingKey, CaseIterable {
         case name = "Name"

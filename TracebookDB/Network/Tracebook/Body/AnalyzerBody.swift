@@ -8,11 +8,11 @@
 import Foundation
 
 struct AnalyzerBody: Codable {
-    let name: String?
-    let createdBy: String?
-    let createdDate: String?
-    let modifiedDate: String?
-    let id: String?
+    var id: String = ""
+    var name: String?
+    var createdBy: String?
+    var createdDate: String?
+    var modifiedDate: String?
 
     enum CodingKeys: String, CodingKey {
         case name = "Name"

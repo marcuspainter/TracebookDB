@@ -8,13 +8,13 @@
 import Foundation
 
 struct InterfaceBody: Codable {
-    let id: String?
-    let brandModel: String?
-    let createdBy: String?
-    let createdDate: String?
-    let modifiedDate: String?
-    let maxOutputVoltage: Int?
-    let selectableVoltageRange: Bool?
+    var id: String = ""
+    var brandModel: String?
+    var createdBy: String?
+    var createdDate: String?
+    var modifiedDate: String?
+    var maxOutputVoltage: Int?
+    var selectableVoltageRange: Bool?
 
     enum CodingKeys: String, CodingKey {
         case brandModel = "Brand+Model"

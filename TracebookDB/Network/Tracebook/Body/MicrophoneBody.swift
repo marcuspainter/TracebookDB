@@ -8,11 +8,11 @@
 import Foundation
 
 struct MicrophoneBody: Codable {
-    let micBrandModel: String?
-    let createdBy: String?
-    let createdDate: String?
-    let modifiedDate: String?
-    let id: String?
+    var id: String = ""
+    var micBrandModel: String?
+    var createdBy: String?
+    var createdDate: String?
+    var modifiedDate: String?
 
     enum CodingKeys: String, CodingKey {
         case micBrandModel = "Mic brand+model"

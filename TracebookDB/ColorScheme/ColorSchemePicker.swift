@@ -1,6 +1,6 @@
 //
 //  ColorSchemePicker.swift
-//  TracebookDB.swift
+//  SoundAnalyzer
 //
 //  Created by Marcus Painter on 25/11/2023.
 //
@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ColorSchemePicker: View {
-    @State var colorSchemeManager = ColorSchemeManager.shared
+    @ObservedObject var colorSchemeManager = ColorSchemeManager.shared
     let text: String
 
     init(_ text: String = "Color Scheme") {

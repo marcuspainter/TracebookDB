@@ -56,6 +56,11 @@ final class MeasurementContent {
     var presetVersionNA: Bool
     var firmwareVersionNA: Bool
     var inputMeter: Double?
+    
+    // Lookup
+    var microphoneText: String
+    var analyzerText: String
+    var interfaceText: String
 
     // Relations
     @Relationship var item: MeasurementItem?
@@ -107,6 +112,10 @@ final class MeasurementContent {
          firmwareVersionNA: Bool = false,
          inputMeter: Double? = nil,
          
+         microphoneText: String = "",
+         analyzerText: String = "",
+         interfaceText: String = "",
+         
          item: MeasurementItem? = nil
     ) {
         self.id = id
@@ -155,6 +164,10 @@ final class MeasurementContent {
         self.presetVersionNA = presetVersionNA
         self.firmwareVersionNA = firmwareVersionNA
         self.inputMeter = inputMeter
+        
+        self.microphoneText = microphoneText
+        self.analyzerText = analyzerText
+        self.interfaceText = interfaceText
         
         self.item = item
     }

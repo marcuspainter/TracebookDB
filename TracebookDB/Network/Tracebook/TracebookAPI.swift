@@ -94,6 +94,23 @@ final class TracebookAPI: Sendable {
         return items
     }
     
+    func getAnalyzers() async -> [AnalyzerBody] {
+        let bubbleRequest = BubbleRequest(entity: "analyzer")
+        let fromDate = "2000-01-01T00:00:00Z"
+        bubbleRequest.constraints.append(BubbleConstraint(key: InterfaceBody.CodingKeys.createdDate.rawValue, type: .greaterThan, value: fromDate))
+        bubbleRequest.sortKeys.append(BubbleSortKey(sortField: InterfaceBody.CodingKeys.createdDate.rawValue, order: .descending))
+        
+        let responses = await bubbleAPI.getListResponseLong(AnalyzerListResponse.self, for: bubbleRequest)
+        
+        var items = [AnalyzerBody]()
+        for response in responses {
+            let results: [AnalyzerBody] = response.response.results
+            items += results
+            //print(results.first?.brandModel)
+        }
+        return items
+    }
+    
     func getUser(id: String) async -> UserBody? {
         let bubbleRequest = BubbleRequest(entity: "user", id: id)
         
