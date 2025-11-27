@@ -24,8 +24,8 @@ final class TracebookService: Sendable {
         let date1 = fetchDBFirstMeasurementDate()
         let date2 = await getAPIFirstMeasurementDate()
         
-        print(date1)
-        print(date2)
+        //print(date1)
+        //print(date2)
     }
     
     func deleteAllMeasurements() {

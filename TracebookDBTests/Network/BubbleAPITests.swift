@@ -41,9 +41,7 @@ final class BubbleAPITests: XCTestCase {
         for response in responses {
             let userResults: [MeasurementBody] = response.response.results
             users += userResults
-            print(userResults.first?.title)
         }
-        print(users.count)
     }
     
     func testExample() async throws {

@@ -5,6 +5,8 @@
 //  Created by Marcus Painter on 25/11/2025.
 //
 
+// https://www.createwithswift.com/display-empty-states-with-contentunavailableview-in-swiftui/
+
 import Foundation
 import SwiftUI
 import SwiftData
@@ -32,7 +34,7 @@ struct MainView: View {
                             ContentUnavailableView.search
                         } else if viewModel.items.isEmpty {
                             ContentUnavailableView(
-                                "No notes",
+                                "No Traces",
                                 systemImage: "doc.text")
                         }
                     }
