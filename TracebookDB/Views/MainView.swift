@@ -25,6 +25,17 @@ struct MainView: View {
                         }.listRowBackground(Color.clear)
                     }
                     .listStyle(.plain)
+                    .overlay {
+                        if viewModel.items.isEmpty && !viewModel.searchText.isEmpty {
+                            /// In case there aren't any search results, we can
+                            /// show the new content unavailable view.
+                            ContentUnavailableView.search
+                        } else if viewModel.items.isEmpty {
+                            ContentUnavailableView(
+                                "No notes",
+                                systemImage: "doc.text")
+                        }
+                    }
                     .refreshable {
 // https://stackoverflow.com/questions/74977787/why-is-async-task-cancelled-in-a-refreshable-modifier-on-a-scrollview-ios-16
                         print("Pull")
@@ -49,10 +60,8 @@ struct MainView: View {
                 }
             }
             .task {
-                viewModel.modelContext = self.tracebookService.store.context
+                viewModel.service = self.tracebookService
                 viewModel.fetchAll()
-                
-                await tracebookService.synchronize()
             }
             .searchable(text: $viewModel.searchText)
         }
@@ -60,16 +69,7 @@ struct MainView: View {
     
     func sync() {
         Task {
-            tracebookService.deleteAllMeasurements()
-            viewModel.fetchAll()
-            print("Start items...")
-            await tracebookService.synchronizeMeasurementItems()
-            print("Done")
-            viewModel.fetchAll()
-            print("Start content...")
-            await tracebookService.synchronizeMeasurementContent()
-            viewModel.fetchAll()
-            print("Done")
+            await viewModel.synchronize()
         }
     }
 }

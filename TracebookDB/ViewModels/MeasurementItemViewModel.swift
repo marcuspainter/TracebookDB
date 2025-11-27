@@ -10,10 +10,11 @@ import Observation
 import SwiftData
 
 @Observable
+@MainActor
 class MeasurementItemViewModel {
 
     private(set) var items: [MeasurementItem] = []
-    var modelContext: ModelContext?
+    var service: TracebookService?
     
     var searchText: String = "" {
            didSet {
@@ -25,39 +26,40 @@ class MeasurementItemViewModel {
                }
            }
        }
-
-    init(modelContext: ModelContext? = nil) {
-        self.modelContext = modelContext
+    
+    init(service: TracebookService? = nil) {
+        self.service = service
     }
 
     // Fetch filtered by title
-     func fetchFiltered(titleContains: String) {
-         guard let context = modelContext else { return }
-         let predicate = #Predicate<MeasurementItem> { item in
-             item.title.localizedStandardContains(titleContains)
-         }
-         
-         let descriptor = FetchDescriptor<MeasurementItem>(
-             predicate: predicate,
-             sortBy: [SortDescriptor(\.createdDate, order: .reverse)]
-         )
-         
+    private func fetchFiltered(titleContains: String) {
+        guard let service else { return }
          do {
-             items = try context.fetch(descriptor)
+             items = try service.store.fetchFiltered(searchText: titleContains)
          } catch {
              print("Failed to fetch filtered items: \(error)")
              items = []
          }
      }
     
+    func synchronize() async {
+        guard let service else { return }
+        service.deleteAllMeasurements()
+        fetchAll()
+        print("Start items...")
+        await service.synchronizeMeasurementItems()
+        print("Done")
+        fetchAll()
+        print("Start content...")
+        await service.synchronizeMeasurementContent()
+        fetchAll()
+        print("Done")
+    }
+    
     func fetchAll() {
-        guard let context = modelContext else { return }
-        let descriptor = FetchDescriptor<MeasurementItem>(
-            sortBy: [SortDescriptor(\MeasurementItem.createdDate, order: .reverse)]
-        )
-
+        guard let service else { return }
         do {
-            items = try context.fetch(descriptor)
+            items = try service.store.fetchMeasurementItems()
         } catch {
             print("Failed to fetch items: \(error)")
             items = []
@@ -65,12 +67,8 @@ class MeasurementItemViewModel {
     }
     
     func deleteAll() {
-        guard let context = modelContext else { return }
-        let descriptor = FetchDescriptor<MeasurementItem>()
-        if let all = try? context.fetch(descriptor) {
-            for m in all {
-                context.delete(m)
-            }
-        }
+        guard let service else { return }
+        try? service.store.deleteAll()
+        items = []
     }
 }

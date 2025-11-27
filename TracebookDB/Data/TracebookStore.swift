@@ -30,6 +30,20 @@ class TracebookStore {
     
     // MARK: Fetch
     
+    // Fetch filtered by title
+     func fetchFiltered(searchText: String) throws -> [MeasurementItem] {
+         let predicate = #Predicate<MeasurementItem> { item in
+             item.title.localizedStandardContains(searchText)
+         }
+         
+         let descriptor = FetchDescriptor<MeasurementItem>(
+             predicate: predicate,
+             sortBy: [SortDescriptor(\.createdDate, order: .reverse)]
+         )
+         return try context.fetch(descriptor)
+    
+     }
+    
     func fetchMeasurementItem(id: String) throws -> MeasurementItem? {
         var descriptor = FetchDescriptor<MeasurementItem>(
             predicate: #Predicate { $0.id == id }
