@@ -15,7 +15,7 @@ struct MeasurementDetailView: View {
     @State var delay: Double = 0.0
     @State var threshold: Double = 0.0
 
-    let dataProcessor: DataProcessor!
+    let dataProcessor: DataProcessor
 
     init(measurement: MeasurementItem) {
         let frequency = measurement.content?.tfFrequency ?? []

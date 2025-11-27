@@ -8,7 +8,6 @@
 import Foundation
 import Network
 
-
 typealias MeasurementListResponse = BubbleListResponse<MeasurementBody>
 typealias MeasurementContentItemResponse = BubbleItemResponse<MeasurementContentBody>
 typealias MicrophoneListResponse = BubbleListResponse<MicrophoneBody>
@@ -19,14 +18,13 @@ typealias InterfaceListResponse = BubbleListResponse<InterfaceBody>
 typealias UserItemResponse = BubbleItemResponse<UserBody>
 typealias UserListResponse = BubbleListResponse<UserBody>
 
-class TracebookAPI {
-    let bubbleAPI = BubbleAPI()
+final class TracebookAPI: Sendable {
+    private let bubbleAPI = BubbleAPI()
     
     func getMeasurementContent(id: String) async -> MeasurementContentBody? {
         let bubbleRequest = BubbleRequest(entity: "measurementcontent", id: id)
         
         let response = await bubbleAPI.getItemResponse(MeasurementContentItemResponse.self, for: bubbleRequest)
-        
         return response?.response
     }
     
@@ -43,9 +41,23 @@ class TracebookAPI {
         for response in responses {
             let results: [MeasurementBody] = response.response.results
             items += results
-            print(results.first?.title)
+            //print(results.first?.title)
         }
         return items
+    }
+    
+    func getLastMeasurement() async -> MeasurementBody? {
+        let bubbleRequest = BubbleRequest(entity: "measurement")
+        let fromDate = "2000-01-01T00:00:00Z"
+        bubbleRequest.constraints.append(BubbleConstraint(key: MeasurementBody.CodingKeys.isPublic.rawValue, type: .equals, value: "true"))
+        bubbleRequest.constraints.append(BubbleConstraint(key: MeasurementBody.CodingKeys.createdDate.rawValue, type: .greaterThan, value: fromDate))
+        bubbleRequest.sortKeys.append(BubbleSortKey(sortField: MeasurementBody.CodingKeys.createdDate.rawValue, order: .descending))
+        bubbleRequest.limit = 1
+        
+        let response = await bubbleAPI.getListResponse(MeasurementListResponse.self, for: bubbleRequest)
+        
+        let items = response?.response.results ?? []
+        return items.first
     }
     
     func getMicrophones() async -> [MicrophoneBody] {
@@ -60,7 +72,7 @@ class TracebookAPI {
         for response in responses {
             let results: [MicrophoneBody] = response.response.results
             items += results
-            print(results.first?.micBrandModel)
+            //print(results.first?.micBrandModel)
         }
         return items
     }
@@ -77,7 +89,7 @@ class TracebookAPI {
         for response in responses {
             let results: [InterfaceBody] = response.response.results
             items += results
-            print(results.first?.brandModel)
+            //print(results.first?.brandModel)
         }
         return items
     }

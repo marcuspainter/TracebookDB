@@ -1,5 +1,5 @@
 //
-//  MeasurementMapper.swift
+//  DataMapperHelper.swift
 //  TracebookDB
 //
 //  Created by Marcus Painter on 13/07/2025.
@@ -8,7 +8,7 @@
 import Foundation
 import SwiftData
 
-struct DataMapper {
+struct DataMapperHelper {
     
     static func parseISODate(_ dateString: String?) -> Date {
         let isoString = dateString ?? ""

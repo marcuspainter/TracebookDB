@@ -10,12 +10,14 @@ import SwiftData
 
 @main
 struct TracebookDBApp: App {
-
+    @State var tracebookService  = TracebookService()
+    
     var body: some Scene {
         WindowGroup {
             //ContentView()
             MainView()
         }
-        .modelContainer(for: [MeasurementItem.self, MeasurementContent.self])
+        .environment(self.tracebookService)
+        
     }
 }

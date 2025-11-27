@@ -8,7 +8,7 @@
 import Foundation
 import Network
 
-class BubbleAPI {
+final class BubbleAPI: Sendable {
 
     // Get an item response
     func getItemResponse<T: BubbleItemResponseProtocol>(_ type: T.Type, for request: BubbleRequest) async -> T? {
@@ -46,7 +46,7 @@ class BubbleAPI {
                 return nil
 
             }
-            print(httpResponse.statusCode)
+            //print("StatusCode: \(httpResponse.statusCode)")
 
             let response = try JSONDecoder().decode(type, from: jsonData)
 
@@ -71,7 +71,7 @@ class BubbleAPI {
             }
 
             responses.append(response)
-            print(response.response.remaining)
+            print("Remaining: \(response.response.remaining)")
 
             if response.response.remaining > 0 {
                 let newCursor: Int? = response.response.cursor + pageSize

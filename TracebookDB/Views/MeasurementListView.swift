@@ -80,9 +80,9 @@ struct MeasurementListView: View {
 
         Button("Download 2") {
             Task {
-                let bubbleAPI = TracebookAPI()
+                let tracebookAPI = TracebookAPI()
                 var list = [MeasurementItem]()
-                let measurements = await bubbleAPI.getMeasurementLong()
+                let measurements = await tracebookAPI.getMeasurementLong()
                 for measurement in measurements {
                     
                     let m = MeasurementItemMapper.toModel(body: measurement)
@@ -108,7 +108,7 @@ struct MeasurementListView: View {
                 
                 for m in list {
                     if m.additionalContent == "" { continue }
-                    if let content = await bubbleAPI.getMeasurementContent(id: m.additionalContent) {
+                    if let content = await tracebookAPI.getMeasurementContent(id: m.additionalContent) {
                         if let c = MeasurementContentMapper.toModel(body: content) {
                             assert(m.additionalContent == c.id, "No match")
                             m.content = c

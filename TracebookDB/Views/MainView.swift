@@ -9,14 +9,14 @@ import Foundation
 import SwiftUI
 import SwiftData
 
+@MainActor
 struct MainView: View {
-    @Environment(\.modelContext) private var modelContext
+    @Environment(TracebookService.self) private var tracebookService
     @State private var viewModel = MeasurementItemViewModel()
-
+    
     var body: some View {
         NavigationStack {
             VStack {
-                if !viewModel.items.isEmpty {
                     List {
                         ForEach(viewModel.items) { measurement in
                             NavigationLink(value: measurement) {
@@ -29,71 +29,10 @@ struct MainView: View {
 // https://stackoverflow.com/questions/74977787/why-is-async-task-cancelled-in-a-refreshable-modifier-on-a-scrollview-ios-16
                         print("Pull")
                         await Task {
-                            try? await Task.sleep(for: .seconds(5))
+                            sync()
                         }.value
                         print("Done")
                     }
-                }
-                
-                Button("Delete") {
-                    let descriptor1 = FetchDescriptor<MeasurementItem>()
-                    if let all = try? modelContext.fetch(descriptor1) {
-                        for m in all {
-                            modelContext.delete(m)
-                        }
-                        try? modelContext.save()
-                    }
-                    let descriptor2 = FetchDescriptor<MeasurementContent>()
-                    if let all = try? modelContext.fetch(descriptor2) {
-                        for m in all {
-                            modelContext.delete(m)
-                        }
-                        try? modelContext.save()
-                    }
-                }
-                
-                Button("Download 2") {
-                    Task {
-                        let bubbleAPI = TracebookAPI()
-                        var list = [MeasurementItem]()
-                        let measurements = await bubbleAPI.getMeasurementLong()
-                        for measurement in measurements {
-                            
-                            let m = MeasurementItemMapper.toModel(body: measurement)
-                            
-                            //if let content = await bubbleAPI.getMeasurementContent(id: m.contentId) {
-                            //    if let c = DataMapper.mapMeasurementContent(body: content) {
-                            //        m.content = c
-                            //        c.item = m
-                            //   }
-                            //}
-                            
-                            print(m.title)
-                            
-                            do {
-                                modelContext.insert(m)
-                                try modelContext.save()
-                                list.append(m)
-                            }
-                            catch {
-                                print("Error: \(error)")
-                            }
-                        }
-                        
-                        for m in list {
-                            if m.additionalContent == "" { continue }
-                            if let content = await bubbleAPI.getMeasurementContent(id: m.additionalContent) {
-                                if let c = MeasurementContentMapper.toModel(body: content) {
-                                    assert(m.additionalContent == c.id, "No match")
-                                    m.content = c
-                                    c.item = m
-                                }
-                            }
-                            print(m.title)
-                        }
-                        print("Done")
-                    }
-                }
             }
             .navigationTitle("TracebookDB")
             .navigationBarTitleDisplayMode(.inline)
@@ -110,13 +49,27 @@ struct MainView: View {
                 }
             }
             .task {
-                viewModel.modelContext = modelContext
+                viewModel.modelContext = self.tracebookService.store.context
                 viewModel.fetchAll()
-            }
-            .onAppear {
-
+                
+                await tracebookService.synchronize()
             }
             .searchable(text: $viewModel.searchText)
+        }
+    }
+    
+    func sync() {
+        Task {
+            tracebookService.deleteAllMeasurements()
+            viewModel.fetchAll()
+            print("Start items...")
+            await tracebookService.synchronizeMeasurementItems()
+            print("Done")
+            viewModel.fetchAll()
+            print("Start content...")
+            await tracebookService.synchronizeMeasurementContent()
+            viewModel.fetchAll()
+            print("Done")
         }
     }
 }

@@ -20,6 +20,9 @@ class MeasurementItemViewModel {
                if !searchText.isEmpty {
                    fetchFiltered(titleContains: searchText)
                }
+               else {
+                   fetchAll()
+               }
            }
        }
 
